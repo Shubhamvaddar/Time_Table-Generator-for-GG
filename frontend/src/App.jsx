@@ -18,7 +18,7 @@ function App() {
 
     setStatus("Uploading and generating...")
     try {
-      const response = await fetch("http://127.0.0.1:8000/generate-schedule/", {
+      const response = await fetch("https://time-table-generator-api.onrender.com/generate-schedule/", {
         method: "POST",
         body: formData,
       })
@@ -34,7 +34,7 @@ function App() {
     e.preventDefault()
     setStatus("Fetching schedule...")
     try {
-      const response = await fetch(`http://127.0.0.1:8000/view-schedule/${classGrade}/${section}`)
+      const response = await fetch(`https://time-table-generator-api.onrender.com/view-schedule/${classGrade}/${section}`)
       if (!response.ok) throw new Error("Schedule not found")
       
       const data = await response.json()
