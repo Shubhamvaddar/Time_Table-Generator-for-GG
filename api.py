@@ -88,3 +88,27 @@ def get_class_schedule(class_grade: int, section: str):
         raise HTTPException(status_code=404, detail="No schedule found for this class.")
         
     return {"class": f"{class_grade}{section}", "schedule": result}
+@app.get("/view-teacher-schedule/{teacher_id}")
+def get_teacher_schedule(teacher_id: int):
+    """
+    Fetch the generated schedule for a specific teacher from MySQL.
+    """
+    conn = get_connection()
+    cursor = conn.cursor(dictionary=True)
+    
+    query = """
+    SELECT class_grade, section, subject, day_of_week, period_number 
+    FROM schedule_entries 
+    WHERE teacher_id = %s
+    ORDER BY day_of_week, period_number
+    """
+    cursor.execute(query, (teacher_id,))
+    result = cursor.fetchall()
+    
+    cursor.close()
+    conn.close()
+    
+    if not result:
+        raise HTTPException(status_code=404, detail="No schedule found for this teacher.")
+        
+    return {"teacher_id": teacher_id, "schedule": result}
