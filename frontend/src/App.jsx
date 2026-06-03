@@ -115,7 +115,7 @@ function App() {
 
       {/* ── Header ── */}
       <header className="header">
-        <p className="header-eyebrow">IIIT Dharwad · Academic Scheduler</p>
+        <p className="header-eyebrow">G G High  School Jamkhandi-587301· Academic Scheduler</p>
         <h1>Timetable <span>Dashboard</span></h1>
         <p className="header-sub">Upload your school data, then view any class or faculty schedule instantly.</p>
       </header>
